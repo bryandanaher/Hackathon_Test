@@ -1,4 +1,21 @@
 package com.example.hackathontest;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import com.example.hackathontest.R.id;
+
+import android.app.Activity;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+
 //
 //import android.support.v7.app.ActionBarActivity;
 //import android.support.v7.app.ActionBar;
@@ -64,7 +81,67 @@ package com.example.hackathontest;
 //
 //}
 
-//import android.R;
+
+//public class MainActivity extends Activity
+//{
+//	
+//	public static final String API_KEY = "";
+//	
+//	private EditText searchBox;
+//	private Button searchButton;
+//	private ListView moviesList;
+//	
+//	@Override
+//	protected void onCreate(Bundle savedInstanceState)
+//	{
+//		super.onCreate(savedInstanceState);
+//		setContentView(R.layout.activity_main);
+//		searchBox = (EditText) findViewById(R.id.text_search_box);
+//		searchButton = (Button) findViewById(R.id.button_search);
+//		searchButton.setOnClickListener(new OnClickListener(){
+//			
+//			@Override
+//			public void onClick(View arg0)
+//			{
+//				new RequestTask().execute(superCoolString);
+//			}
+//			
+//		});
+//		
+//		moviesList = (ListView) findViewById(R.id.list_movies);
+//		
+//	}
+//	
+//	//define how the movie titles are going to be layed out
+//	private void refreshMoviesList(String[] movieTitles)
+//	{
+//		moviesList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, movieTitles));
+//	}
+//	
+//	private class RequestTask extends AsyncTask<String, String, String>
+//	{
+//
+//		HttpClient httpClient = new DefaultHttpClient();
+//		HttpResponse response;
+//		String responseString = null;
+//		
+//		@Override
+//		protected String doInBackground(String... params) {
+//			// TODO Auto-generated method stub
+//			return null;
+//		}
+//		
+//		@Override
+//		protected void onPostExecute(String response){
+//			
+//		}
+//		
+//	}
+//	
+//}
+
+
+import android.app.Activity;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -92,7 +169,9 @@ import java.io.IOException;
 public class MainActivity extends Activity
 {
     // the Rotten Tomatoes API key of your application! get this from their website
-    private static final String API_KEY = "qzm44antn5p2ddbatv2haan9"; //<your api key!>; 
+    private static final String API_KEY = "qzm44antn5p2ddbatv2haan9"; //<your api key!>;
+//	PaymentsApi.PRIVATE_KEY = "+h78riukmgKzQ30EktbTWwCtXlORxN3nMbeiT9GjxrV5YFFQL0ODSXAOkNtXTToq";
+//	PaymentsApi.PUBLIC_KEY = "sbpb_Y2VlM2M0MDItZmRiMS00ZDg1LWJmMjQtYzdlNjA4ZDhkODMw";
 
     // the number of movies you want to get in a single request to their web server
     private static final int MOVIE_PAGE_LIMIT = 10; 
@@ -115,7 +194,8 @@ public class MainActivity extends Activity
             @Override
             public void onClick(View arg0)
             {
-                new RequestTask().execute("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=" + API_KEY + "&q=" + searchBox.getText().toString().trim() + "&page_limit=" + MOVIE_PAGE_LIMIT);
+//                new RequestTask().execute("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=" + API_KEY + "&q=" + searchBox.getText().toString().trim() + "&page_limit=" + MOVIE_PAGE_LIMIT);
+            	new RequestTask().execute("http://springboottest2.cfapps.io/helloJSON");
             }
         });
         moviesList = (ListView) findViewById(R.id.list_movies);
@@ -185,7 +265,7 @@ public class MainActivity extends Activity
                     for (int i = 0; i < movies.length(); i++)
                     {
                         JSONObject movie = movies.getJSONObject(i);
-                        movieTitles[i] = movie.getString("title");
+                        movieTitles[i] = movie.getString("text");
                     }
 
                     // update the UI
